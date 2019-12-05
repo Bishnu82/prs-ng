@@ -20,8 +20,8 @@ export class ProductDetailComponent implements OnInit {
               private loc: Location) { }
 
   ngOnInit() {
-
     this.route.params.subscribe(parms => this.id = parms['id']);
+
 
     this.productSvc.get(this.id).subscribe(jr =>{
       this.product = jr.data as Product;

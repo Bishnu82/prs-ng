@@ -1,59 +1,84 @@
 <div class="component-content">
-    <div class="lefthalf">
-      <span class="component-title">{{ title }}</span>
-      <span
-        ><a routerLink="/requests/create">
-          <img
-            id="createnew"
-            width="20"
-            height="20"
-            src="assets/add-icon.png"
-            title="Add New"
-        /></a>
-      </span>
-    </div>
+  <div class="lefthalf">
+    <span class="component-title">{{ title }}</span>
+    <span> | <a routerLink="/requests/list">Return to list...</a></span>
   </div>
-  <p *ngIf="!requests">Loading...</p>
-  <table *ngIf='requests' class="table">
-    <tr>
-      <th><a (click)="sortBy('id')">ID</a></th>
-      <th><a (click)="sortBy('date')">User</a></th>
-      <th><a (click)="sortBy('description')">Description</a></th>
-      <th><a (click)="sortBy('status')">Status</a></th>
-      <th><a (click)="sortBy('total')">Total</a></th>
-    </tr>
-    <tr *ngFor="let r of requests | sort: sortCriteria:sortOrder">
-      <td>{{ r.id }}</td>
-      <td>{{ r.user.userName }}</td>
-      <td>{{ r.description }}</td>
-      <td>{{ r.status }}</td>
-      <td>{{ r.total }}</td>
-    </tr>
-  </table>
-  <table *ngIf='lineitems' class="table">
-    <tr>
-      <th><a (click)="sortBy('product')">Product</a></th>
-      <th><a (click)="sortBy('quantity')">Quantity</a></th>
-      <th><a (click)="sortBy('subtotal')">Subtotal</a></th>
-      <th>Action</th>
-    </tr>
-    <tr *ngFor="let l of lineitems | sort: sortCriteria:sortOrder">
-      <td>{{ r.id }}</td>
-      <td>{{ r.user.userName }}</td>
-      <td>{{ r.description }}</td>
-      <td>{{ r.status }}</td>
-      <td>{{ r.total }}</td>
-      <td>
-        <a routerLink="/requests/detail/{{ r.id }}"
-          ><img src="assets/details.png" width="20" height="20" title="Detail"
-        /></a> |
-        <a routerLink="/requests/edit/{{ r.id }}"
-          ><img src="assets/pencil-icon.png" width="20" height="20" title="Edit"
-        /></a> |
-        <a routerLink="/requests/lines/{{ r.id }}"
-          ><img src="assets/lines.png" width="20" height="20" title="Line Items"
-        /></a>
-      </td>
-    </tr>
-  </table>
-  
+</div>
+<p *ngIf="!request">Loading...</p>
+<table *ngIf="request" class="table">
+  <tr>
+    <th>ID</th>
+    <th>Description</th>
+    <th>Status</th>
+    <th>Total</th>
+  </tr>
+  <tr>
+    <td>{{ request.id }}</td>
+    <td>{{ request.description }}</td>
+    <td>{{ request.status }}</td>
+    <td>{{ request.total }}</td>
+  </tr>
+</table>
+
+<div class="add">
+  <div class="lefthalf">
+    <span class="component-title">{{ title2 }}</span>
+    <span
+      ><a routerLink="/line-items/create/{{ request.id }}">
+        <img
+          id="createnew"
+          width="20"
+          height="20"
+          src="assets/add-icon.png"
+          title="Add New"
+      /></a>
+    </span>
+  </div>
+</div>
+<!-- <div *ngIf="lineitems.length == 0" class="nolines">
+  No line items yet. Click above to create a new line item for this request.
+</div> -->
+<table *ngIf='lineItems' class="table table-striped">
+  <thead>
+      <tr>
+          <th>Id:</th>
+          <th>Product:</th>
+          <th>Quantity:</th>
+          <th>Price:</th>
+          <th>Line Total:</th>
+          <th>Action:</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr *ngFor="let l of lineItems">
+          <td>{{l.id}}</td>
+          <td>{{l.product.name}}</td>
+          <td>{{l.quantity}}</td>
+          <td>{{l.product.price | currency}}</td>
+          <td>{{l.quantity * l.product.price | currency}}</td>
+          <td>
+            <a routerLink="/line-items/edit/{{ l.id }}"
+              ><img
+                class="default"
+                src="assets/pencil-icon.png"
+                width="20"
+                height="20"/>
+              <img
+                class="hover"
+                src="assets/pencil-icon-hover.png"
+                width="20"
+                height="20"
+            /></a>
+            |
+            <a (click)="delete(l.id)" onclick="location.reload(true)"
+              ><img class="default" src="assets/delete.png" width="20" height="20"/>
+              <img
+                class="hover"
+                src="assets/delete-hover.png"
+                width="20"
+                height="20"
+            /></a>
+          </td>
+        </tr>
+      </tbody>
+    </table>

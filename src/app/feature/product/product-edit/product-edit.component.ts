@@ -51,11 +51,11 @@ export class ProductEditComponent implements OnInit {
     });
   }
 
-  compuser(a: User, b: User): boolean{
+  compUser(a: User, b: User): boolean{
     return a && b && a.id === b.id;
   }
 
-  compvendor(a: Vendor, b: Vendor): boolean{
+  compVendor(a: Vendor, b: Vendor): boolean{
     return a && b && a.id === b.id;
   }
 

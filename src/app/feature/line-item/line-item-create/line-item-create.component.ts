@@ -6,7 +6,7 @@ import { LineItemService } from 'src/app/service/line-item.service';
 import { ProductService } from 'src/app/service/product.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BaseComponent } from '../../base/base.component';
-import { User } from 'src/app/model/user.class';
+import { Request } from 'src/app/model/request.class';
 
 @Component({
   selector: 'app-line-item-create',
@@ -16,13 +16,18 @@ import { User } from 'src/app/model/user.class';
 export class LineItemCreateComponent extends BaseComponent implements OnInit {
   title: 'Line-Item Create'
   lineitem: LineItem = new LineItem();
-  products: Product[];
-  user: User[];
-  id: number;
+  lineitems: LineItem[] = [];
+  products: Product[] = [];
+  request: Request = new Request;
+  product: Product = new Product;
+  id: number = 0;
+  
   
   constructor(protected sysSvc: SystemService,
-              private lineitemsvc: LineItemService,
-              private productsvc: ProductService,
+              private lineItemSvc: LineItemService,
+              private productSvc: ProductService,
+              private requestSvc: ProductService,
+
               private route: ActivatedRoute,
               private router: Router) {
                 super(sysSvc)
@@ -31,23 +36,26 @@ export class LineItemCreateComponent extends BaseComponent implements OnInit {
   
   
   ngOnInit() {
-    // this.lineitem.user = this.sysSvc.loggedInUser;
-    // this.route.params.subscribe(parms => this.id = parms['id']);
-    
-    // this.productsvc.list()
-    // .subscribe(resp => {
-    //   console.log("Resp:", resp);
-    //   this.products = resp.Data;
+    this.loggedInUser = this.sysSvc.loggedInUser;
+    this.route.params.subscribe(parms => this.id = parms['id']);
+    // this.requestSvc.get(this.id).subscribe(jr => {
+    //   this.request = jr.data as Request;
+    //   this.lineitem.request = this.request;
+    // });
+    this.productSvc.list().subscribe(jr => {
+      console.log("jr:", jr);
+      this.products = jr.data as Product[];
+      });
+    }
+
+    save(): void {
+      this.productSvc.save(this.product).subscribe(jr => {
+        console.log('saved product...');
+        console.log(this.product);
+        this.router.navigateByUrl('/requests/lines')
+      });
+    }
+    // this.lineItemSvc.linesForRequest(this.id).subscribe(jr => {
+    //   this.lineitems = jr.data as LineItem[];
     // });
   }
-//   save(): void {
-//   this.lineitem. = Number(this.prid);
-//   console.log("reqline:", this.reqline, ", route:", this.reqline.RequestId);
-//   this.reqlinesvc.create(this.reqline)
-//   .subscribe(resp => {
-//   console.log("resp:", resp);
-//   this.router.navigateByUrl('/requests/lines/'+this.prid);
-//   });
-//   }
-
-}

@@ -19,7 +19,8 @@ import { RequestDetailComponent } from './feature/request/request-detail/request
 import { UserLoginComponent } from './feature/user/user-login/user-login.component';
 import { RequestReviewComponent } from './feature/request/request-review/request-review.component';
 import { RequestLinesComponent } from './feature/request/request-lines/request-lines.component';
-
+import { LineItemCreateComponent } from './feature/line-item/line-item-create/line-item-create.component';
+import { LineItemEditComponent } from './feature/line-item/line-item-edit/line-item-edit.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -43,11 +44,9 @@ const routes: Routes = [
   { path: 'requests/detail/:id', component: RequestDetailComponent},
   { path: 'requests/review/:id', component: RequestReviewComponent},
   { path: 'requests/lines/:id', component: RequestLinesComponent},
-
-
-
-  { path: '**', component: UserListComponent}
-
+  { path: "line-items/create", component: LineItemCreateComponent},
+  { path: "line-items/edit/:id", component: LineItemEditComponent},
+  { path: '**', component: UserLoginComponent}
 ];
 
 @NgModule({

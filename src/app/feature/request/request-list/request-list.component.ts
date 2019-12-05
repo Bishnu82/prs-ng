@@ -15,7 +15,7 @@ export class RequestListComponent extends BaseComponent implements OnInit {
   
   constructor(private requestSvc: RequestService,
               protected sysSvc: SystemService) {
-      super(sysSvc);
+                super(sysSvc);
      }
 
   ngOnInit() {
