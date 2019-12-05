@@ -23,8 +23,8 @@
       <th><a (click)="sortBy('lastName')">LastName</a></th>
       <th><a (click)="sortBy('phoneNumber')">PhoneNumber</a></th>
       <th><a (click)="sortBy('email')">Email</a></th>
-      <th><a (click)="sortBy('isReviewer')">isReviewer</a></th>
-      <th><a (click)="sortBy('isAdmin')">isAdmin</a></th>
+      <th><a (click)="sortBy('reviewer')">Reviewer</a></th>
+      <th><a (click)="sortBy('admin')">Admin</a></th>
       <th>Action</th>
     </tr>
     <tr *ngFor="let u of users | sort: sortCriteria:sortOrder">
@@ -35,8 +35,8 @@
       <td>{{ u.lastName }}</td>
       <td>{{ u.phoneNumber }}</td>
       <td>{{ u.email }}</td>
-      <td>{{ u.isReviewer }}</td>
-      <td>{{ u.isAdmin }}</td>
+      <td>{{ u.reviewer }}</td>
+      <td>{{ u.admin }}</td>
       <td>
         <a routerLink="/users/detail/{{ u.id }}"
           ><img src="assets/details.png" width="20" height="20" title="Detail"

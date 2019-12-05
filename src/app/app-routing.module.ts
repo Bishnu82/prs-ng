@@ -17,6 +17,8 @@ import { RequestCreateComponent } from './feature/request/request-create/request
 import { RequestEditComponent } from './feature/request/request-edit/request-edit.component';
 import { RequestDetailComponent } from './feature/request/request-detail/request-detail.component';
 import { UserLoginComponent } from './feature/user/user-login/user-login.component';
+import { RequestReviewComponent } from './feature/request/request-review/request-review.component';
+import { RequestLinesComponent } from './feature/request/request-lines/request-lines.component';
 
 
 const routes: Routes = [
@@ -39,6 +41,10 @@ const routes: Routes = [
   { path: 'requests/create', component: RequestCreateComponent},
   { path: 'requests/edit/:id', component: RequestEditComponent},
   { path: 'requests/detail/:id', component: RequestDetailComponent},
+  { path: 'requests/review/:id', component: RequestReviewComponent},
+  { path: 'requests/lines/:id', component: RequestLinesComponent},
+
+
 
   { path: '**', component: UserListComponent}
 
