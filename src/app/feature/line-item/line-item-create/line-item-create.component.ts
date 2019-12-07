@@ -7,6 +7,7 @@ import { ProductService } from 'src/app/service/product.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BaseComponent } from '../../base/base.component';
 import { Request } from 'src/app/model/request.class';
+import { RequestService } from 'src/app/service/request.service';
 
 @Component({
   selector: 'app-line-item-create',
@@ -15,47 +16,44 @@ import { Request } from 'src/app/model/request.class';
 })
 export class LineItemCreateComponent extends BaseComponent implements OnInit {
   title: 'Line-Item Create'
-  lineitem: LineItem = new LineItem();
-  lineitems: LineItem[] = [];
+  lineItem: LineItem = new LineItem();
   products: Product[] = [];
-  request: Request = new Request;
-  product: Product = new Product;
+  request: Request = new Request();
   id: number = 0;
   
   
   constructor(protected sysSvc: SystemService,
               private lineItemSvc: LineItemService,
               private productSvc: ProductService,
-              private requestSvc: ProductService,
-
+              private requestSvc: RequestService,
               private route: ActivatedRoute,
               private router: Router) {
                 super(sysSvc)
                }
 
-  
-  
   ngOnInit() {
     this.loggedInUser = this.sysSvc.loggedInUser;
-    this.route.params.subscribe(parms => this.id = parms['id']);
-    // this.requestSvc.get(this.id).subscribe(jr => {
-    //   this.request = jr.data as Request;
-    //   this.lineitem.request = this.request;
-    // });
+    console.log(this.lineItem)
+    //populate list of products
     this.productSvc.list().subscribe(jr => {
-      console.log("jr:", jr);
       this.products = jr.data as Product[];
-      });
-    }
+      console.log("products: ", this.products);
+    });
+    this.route.params.subscribe(parms => this.id = parms['id']);
+    this.requestSvc.get(this.id).subscribe(jr => {
+      this.request = jr.data as Request;
+    });
+  }
 
     save(): void {
-      this.productSvc.save(this.product).subscribe(jr => {
-        console.log('saved product...');
-        console.log(this.product);
-        this.router.navigateByUrl('/requests/lines')
+      console.log("attempting to save line item:", this.lineItem);
+      this.lineItem.request = this.request;
+
+      this.lineItemSvc.save(this.lineItem).subscribe(jr => {
+        console.log('saved lineItem...');
+        console.log(this.lineItem);
+        // this.lineitems = jr.data as LineItem[];
+        this.router.navigateByUrl('/requests/lines/'+this.id);
       });
     }
-    // this.lineItemSvc.linesForRequest(this.id).subscribe(jr => {
-    //   this.lineitems = jr.data as LineItem[];
-    // });
   }

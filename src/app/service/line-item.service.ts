@@ -15,23 +15,27 @@ export class LineItemService {
               private http: HttpClient) { }
 
   list(): Observable<JsonResponse> {
-    return this.http.get(this.url + "List") as Observable<JsonResponse>;
+    return this.http.get(this.url) as Observable<JsonResponse>;
   }
 
-  get(id): Observable<JsonResponse> {
-    return this.http.get(this.url + "Get/" + id) as Observable<JsonResponse>;
+  get(id: number): Observable<JsonResponse> {
+    return this.http.get(this.url + id) as Observable<JsonResponse>;
   }
 
-  save(lineitem: LineItem): Observable<JsonResponse> {
-    return this.http.post(this.url + "Create", lineitem) as Observable<JsonResponse>;
+  save(lineItem: LineItem): Observable<JsonResponse> {
+    return this.http.post(this.url, lineItem) as Observable<JsonResponse>;
   }
 
-  update(lineitem: LineItem): Observable<JsonResponse> {
-    return this.http.post(this.url + "Change", lineitem) as Observable<JsonResponse>;
+  update(lineItem: LineItem): Observable<JsonResponse> {
+    return this.http.post(this.url, lineItem) as Observable<JsonResponse>;
   }
 
-  delete(lineitem: LineItem): Observable<JsonResponse> {
-    return this.http.post(this.url + "Remove", lineitem) as Observable<JsonResponse>;
+  delete(id: number): Observable<JsonResponse> {
+    return this.http.delete(this.url+id) as Observable<JsonResponse>;
+  }
+
+  listLineItemById(id: number): Observable<JsonResponse> {
+    return this.http.get(this.url + "lines-for-pr/" + id) as Observable<JsonResponse>
   }
 
 }
