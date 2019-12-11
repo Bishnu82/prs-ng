@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/713da0aa-d4e8-4376-914e-8e577d1ffdc1/resourceGroups/PRS_NG/providers/Microsoft.Web/sites/PRS-NG",
+    "appService.deploySubpath": ""
+}

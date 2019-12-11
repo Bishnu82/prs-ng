@@ -21,6 +21,7 @@ import { RequestReviewComponent } from './feature/request/request-review/request
 import { RequestLinesComponent } from './feature/request/request-lines/request-lines.component';
 import { LineItemCreateComponent } from './feature/line-item/line-item-create/line-item-create.component';
 import { LineItemEditComponent } from './feature/line-item/line-item-edit/line-item-edit.component';
+import { RequestApproveComponent } from './feature/request/request-approve/request-approve.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -42,8 +43,10 @@ const routes: Routes = [
   { path: 'requests/create', component: RequestCreateComponent},
   { path: 'requests/edit/:id', component: RequestEditComponent},
   { path: 'requests/detail/:id', component: RequestDetailComponent},
-  { path: 'requests/review/:id', component: RequestReviewComponent},
+  { path: 'requests/review', component: RequestReviewComponent},
+  // { path: 'requests/submit-review/:id', component: RequestReviewComponent},
   { path: 'requests/lines/:id', component: RequestLinesComponent},
+  { path: 'requests/approve/:id', component: RequestApproveComponent},
   { path: "line-items/create/:id", component: LineItemCreateComponent},
   { path: "line-items/edit/:id", component: LineItemEditComponent},
   { path: '**', component: UserLoginComponent}

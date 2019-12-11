@@ -28,7 +28,7 @@
   <div class="lefthalf">
     <span class="component-title">{{ title2 }}</span>
     <span
-      ><a routerLink="/line-items/create/{{request.id}}">
+      ><a routerLink="/line-items/create/{{ request.id }}">
         <img
           id="createnew"
           width="20"
@@ -52,6 +52,9 @@
     </tr>
   </thead>
   <tbody>
+    <tr *ngIf="lineItems==''" class="nolines">
+      No line items yet. Click above to create a new line item for this request.
+    </tr>
     <tr *ngFor="let l of lineItems">
       <td>{{ l.id }}</td>
       <td>{{ l.product.name }}</td>
@@ -79,8 +82,9 @@
       </td>
     </tr>
   </tbody>
-  <span><button (click)="submitForReview()" class="btn btn-sm btn-primary">Submit for Review</button></span>
+  <span
+    ><button (click)="submitForReview()" class="btn btn-sm btn-primary">
+      Submit for Review
+    </button></span
+  >
 </table>
-<!-- <div *ngIf="lineitems.length == 0" class="nolines">
-    No line items yet. Click above to create a new line item for this request.
-  </div> -->
